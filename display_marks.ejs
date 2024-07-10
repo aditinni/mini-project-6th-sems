@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display Marks</title>
+    <style>
+          @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        body
+        {
+            font-family: 'Poppins', sans-serif;
+
+
+        }
+              table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table th, table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        table th {
+            background-color: #f0f0f0;
+            color: #333;
+        }
+
+        table td {
+            background-color: #fff;
+            color: #555;
+        }
+
+        .total-marks {
+            font-weight: bold;
+            color: #333;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Marks for <%= findtest[0].usn %> - <%= findtest[0].test %></h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Subject</th>
+                <th>Marks</th>
+                <th>Total Marks</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% findtest.forEach(test => { %>
+                <tr>
+                    <td><%= test.subject %></td>
+                    <td><%= test.marks %></td>
+                    <td>20</td> <!-- Total marks is 20 for each test -->
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+</body>
+</html>

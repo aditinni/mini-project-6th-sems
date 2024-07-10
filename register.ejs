@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/student_login.css">
+    <link rel="shortcut icon" type="image/x-icon" href="logo.png" />
+    <title>Student Register</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .body {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            font-family: "Montserrat", sans-serif;
+        }
+
+        .left {
+            width: 50%;
+            height: 100%;
+            background-color: #1c1d21;
+        }
+
+        .right {
+            width: 50%;
+            height: 100%;
+            background-color: #0fb173;
+        }
+
+        .form {
+            width: 80%;
+            height: 90%;
+            border: transparent;
+            border-radius: 50px;
+            box-shadow: 2px 2px 80px black;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+        }
+
+        .fill-form {
+            width: 50%;
+            height: 100%;
+            background-color: #1c1d21;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .heading h1,
+        h4 {
+            color: white;
+            margin: 10px;
+        }
+
+        .input-field {
+            display: flex;
+            flex-direction: column;
+            width: 500px;
+        }
+
+        .login-button {
+            width: 500px;
+            padding: 10px 14px;
+            background-color: #0fb173;
+            border-radius: 20px;
+            border: none;
+            color: white;
+            font-family: "Montserrat", sans-serif;
+            font-weight: bolder;
+            cursor: pointer;
+        }
+
+        input {
+            margin: 10px 20px;
+            padding: 10px 10px;
+            background-color: white;
+            border: none;
+            color: #0fb173;
+            width: 100%;
+        }
+
+        input::placeholder {
+            font-family: "Montserrat", sans-serif;
+            font-weight: bolder;
+            color: #0fb173;
+        }
+
+        .icon-field {
+            display: flex;
+            justify-content: center;
+            gap: 0px;
+        }
+
+        .box1 {
+            width: 50px;
+            height: 69%;
+            background-color: #0fb173;
+            margin: 10px;
+            position: relative;
+            left: 30px;
+        }
+
+        .box1 img {
+            position: relative;
+            top: 4px;
+        }
+
+        .box2 {
+            width: 50px;
+            height: 68%;
+            background-color: #0fb173;
+            margin: 10px;
+            position: relative;
+            left: 30px;
+        }
+
+        .box3 {
+            width: 50px;
+            height: 68%;
+            background-color: #0fb173;
+            margin: 10px;
+            position: relative;
+            left: 30px;
+        }
+
+        h4 {
+            text-align: center;
+        }
+
+        .box2 img {
+            position: relative;
+            top: 4px;
+        }
+
+        .box3 img {
+            position: relative;
+            top: 4px;
+        }
+
+        input:focus {
+            outline: none;
+        }
+
+        .message {
+            width: 50%;
+            height: 100%;
+            background-color: white;
+        }
+
+        .message img {
+            position: relative;
+            top: 10%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70%;
+        }
+
+        .message-flex {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            top: 2%;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .mh1 {
+            font-size: 50px;
+            letter-spacing: 2px;
+        }
+
+        .mh2 {
+            font-size: 30px;
+            letter-spacing: 2px;
+        }
+
+        .mp {
+            font-size: 16px;
+        }
+
+        .message .students {
+            position: relative;
+            top: 180px;
+            width: 60%;
+        }
+
+        .captcha-box {
+            border: 4px solid #0fb173;
+            height: 10vh;
+            width: 20vw;
+            background-color: white;
+        }
+
+        .capbut {
+            padding: 10px 14px;
+            margin: 10px;
+            font-family: "Montserrat", sans-serif;
+            border: transparent;
+            border-radius: 20px;
+            font-weight: bolder;
+            color: white;
+            cursor: pointer;
+        }
+
+        #vbut {
+            background-color: #0fb173;
+        }
+
+        #vbut:hover {
+            background-color: #0e412e;
+        }
+
+        #gbut {
+            background-color: rgb(173, 58, 16);
+        }
+
+        #gbut:hover {
+            background-color: rgb(107, 29, 0);
+        }
+
+        #captchaMessage {
+            text-align: center;
+            font-size: 25px;
+            margin: 16px;
+            font-weight: bolder;
+            letter-spacing: 20px;
+            color: rgb(226, 72, 72);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="body">
+        <div class="left">
+            <div class="form">
+                <form action="/success" method="post" class="fill-form">
+                    <div class="heading">
+                        <h1>Student register</h1>
+                        <h4>Enter your account details</h4>
+                    </div>
+                    <div class="input-field">
+                        <div class="icon-field">
+                            <div class="box1">
+                                <img src="usn.png" alt="not able to load" width="100%" height="80%">
+                            </div>
+                            <input type="text" name="usn" id="usn" placeholder="Enter USN" required>
+                        </div>
+
+                        <div class="icon-field">
+                            <div class="box2">
+                                <img src="password.png" alt="not able to load" width="100%" height="80%">
+                            </div>
+                            <input type="password" name="password" id="pass" placeholder="Enter Password" required>
+                        </div>
+
+                        <div class="icon-field">
+                            <div class="box2">
+                                <img src="branch.png" alt="not able to load" width="100%" height="80%">
+                            </div>
+                            <input type="text" name="branch" id="pass" placeholder="Enter branch" required>
+                        </div>
+                        <button class="login-button" type="submit" id="but">Resgister</button>
+                    </div>
+                </form>
+                <div class="message">
+                    <img src="logo.webp" alt="not able to load">
+                    <div class="message-flex">
+                        <h1 class="mh1">Welcome to</h1>
+                        <h1 class="mh2">Student Portal</h1>
+                        <p class="mp">Register Here</p>
+                    </div>
+                    <img src="student.png" alt="not able to load" class="students">
+                </div>
+            </div>
+        </div>
+        <div class="right"></div>
+    </div>
+</body>
+
+</html>

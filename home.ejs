@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bangalore Institute of Technology</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f0f4f8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    text-align: center;
+    background-color: #ffffff;
+    padding: 50px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+h1 {
+    margin-bottom: 40px;
+    color: #333;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.btn {
+    display: inline-block;
+    text-decoration: none;
+    color: #ffffff;
+    background-color: #0e6c42;
+    padding: 15px 30px;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #00b34b;
+}
+
+@media (min-width: 600px) {
+    .buttons {
+        flex-direction: row;
+    }
+}
+
+img{
+    position:relative;
+    bottom: 35px;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Bangalore Institute of Technology</h1>
+        <img src="https://upload.wikimedia.org/wikipedia/en/d/d7/Bangalore_Institute_of_Technology_logo.png" width="100px">
+        <div class="buttons">
+            <a href="/register" class="btn">Student Registration</a>
+            <a href="/stulogin" class="btn">Student Login</a>
+            <a href="/teacher_login" class="btn">Teacher Login</a>
+        </div>
+    </div>
+</body>
+</html>

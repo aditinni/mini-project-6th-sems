@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance Portal</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap');
+
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Poppins", sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        nav {
+            height: 70px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        nav img {
+            width: 50px;
+            height: auto;
+        }
+
+        nav h1 {
+            font-size: 1.5rem;
+            margin-left: 20px;
+        }
+
+        form {
+            margin: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        .flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 2px solid transparent;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin: 10px;
+            padding: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .left, .right {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h2 {
+            font-size: 1rem;
+            margin: 5px 0;
+        }
+
+        .flex-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 10px 14px;
+            cursor: pointer;
+            border: none;
+            background-color: #0ba95a;
+            color: white;
+            font-size: 1rem;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #088b4e;
+        }
+
+        input[type="checkbox"] {
+            accent-color: #097352; /* Only works in some modern browsers */
+        }
+
+        @media (max-width: 768px) {
+            .flex {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+   <nav>
+    <img src="logo.png" alt="Logo">
+    <h1>Attendance Portal</h1>
+   </nav>
+    <form id="attendanceForm">
+        <ul>
+            <% if (attendanceRecords && attendanceRecords.length) { %>
+                <% attendanceRecords.forEach(record => { %>
+                   <div class="flex" id="box-<%= record.usn %>">
+                    <div class="left">
+                        <h2>USN</h2>
+                        <h3><%= record.usn %></h3>
+                    </div>
+                    <div class="right">
+                        <h2>Name</h2>
+                        <div class="flex-checkbox">
+                            <h3><%= record.name %></h3>
+                            <input type="checkbox" name="attendance" value="<%= record.usn %>" data-box-id="box-<%= record.usn %>">
+                        </div>
+                    </div>
+                   </div>
+                <% }) %>
+            <% } else { %>
+                <li>No attendance records found.</li>
+            <% } %>
+        </ul>
+        <button type="button" onclick="downloadCSV()">Submit</button>
+    </form>
+
+    <script>
+        document.querySelectorAll('input[name="attendance"]').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const boxId = this.getAttribute('data-box-id');
+                const box = document.getElementById(boxId);
+                if (this.checked) {
+                    box.style.backgroundColor = "#90EE90";
+                } else {
+                    box.style.backgroundColor = "";
+                }
+            });
+        });
+
+        function getCurrentDate() {
+            const now = new Date();
+            const date = now.toISOString().split('T')[0];
+            return date;
+        }
+
+        function downloadCSV() {
+            const checkboxes = document.querySelectorAll('input[name="attendance"]');
+            const attendanceData = [];
+            const date = getCurrentDate(); // Get current date
+
+            checkboxes.forEach(checkbox => {
+                const usn = checkbox.value; // Full USN
+                const name = checkbox.closest('.flex').querySelector('.flex-checkbox h3').textContent.trim();
+                const attendanceStatus = checkbox.checked ? "Present" : "Absent"; // Set status based on checkbox state
+                attendanceData.push({ usn, name, attendanceStatus, date });
+            });
+
+            const csvContent = "data:text/csv;charset=utf-8," + 
+                "Name,USN,Status,Date\n" + // Include headings
+                attendanceData.map(s => `${s.name},${s.usn},${s.attendanceStatus},${s.date}`).join("\n");
+
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            const fileName = `attendance_${date}.csv`;
+            link.setAttribute("download", fileName);
+            document.body.appendChild(link);
+            link.click(); // Trigger the download
+            document.body.removeChild(link); // Clean up the link element
+        }
+    </script>
+</body>
+</html>

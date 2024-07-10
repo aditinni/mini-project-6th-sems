@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>Teacher Dashboard</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            box-shadow: inset 0 0 5px grey;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgb(7, 89, 133);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgb(9, 71, 35);
+        }
+
+        body {
+            overflow-x: hidden;
+            font-family: "Poppins", sans-serif;
+        }
+
+        nav {
+            width: 100%;
+            height: 60px;
+            background-color: white;
+            border-bottom: 2px solid grey;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+
+        nav img {
+            width: 50px;
+            height: auto;
+        }
+
+        .flex-options {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .flex-options h4 {
+            font-size: 18px;
+            color: rgb(0, 109, 128);
+        }
+
+        section {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .left {
+            width: 100%;
+            max-width: 300px; /* Adjust max-width as needed */
+            background-color: white;
+            box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .right {
+            flex: 1;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+
+        .box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            border-left: 6px solid rgb(7, 68, 133);
+            background-color: rgb(118, 151, 248);
+            margin-top: 10px;
+            text-decoration: none;
+            color: white;
+        }
+
+        .box a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .left h3 {
+            color: grey;
+            margin: 10px 0;
+            font-size: 16px;
+        }
+
+        hr {
+            margin-top: 3px;
+            border: 1px solid grey;
+        }
+
+        .flex-boxes {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .right-box {
+            width: 100%;
+            max-width: 250px;
+            height: 100px;
+            background-color: white;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .right-box h3 {
+            color: grey;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .right-box i {
+            font-size: 36px;
+            color: #333;
+        }
+
+        footer {
+            width: 100%;
+            height: 30px;
+            background-color: white;
+            border: 1px solid grey;
+            text-align: center;
+            margin-top: auto; /* Adjust margin-top to push footer to the bottom */
+        }
+
+        footer p {
+            line-height: 30px;
+        }
+
+        /* Responsive Adjustments */
+        @media (min-width: 768px) {
+            .flex-options {
+                gap: 30px;
+            }
+
+            .box {
+                padding: 15px;
+            }
+
+            .left {
+                max-width: 250px;
+            }
+
+            .right-box {
+                max-width: 200px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .flex-options {
+                gap: 40px;
+            }
+
+            .left {
+                max-width: 300px;
+            }
+
+            .right-box {
+                max-width: 250px;
+            }
+        }
+
+        /* Toggling Mode Styles */
+        .coloring {
+            background-color: #333;
+        }
+
+        .box-color {
+            background-color: #3f3d3d;
+        }
+
+        .rightcolor {
+            background-color: rgb(41, 41, 41);
+        }
+
+        .headings {
+            color: white;
+        }
+
+        nav i {
+            color: rgb(77, 132, 172);
+        }
+
+        /* Project and Syllabus Colors */
+        #pro {
+            border-left-color: #f44336;
+            color: #f44336;
+        }
+
+        #syl {
+            border-left-color: #03a9f4;
+            color: #03a9f4;
+        }
+     .right-box a{
+        text-decoration: none;
+        color: grey;
+        font-weight: bolder;
+     }
+     .flex-options a{
+        text-decoration: none;
+        font-size: 20px;
+        color: rgb(0, 109, 128);
+     }
+    </style>
+</head>
+
+<body>
+    <nav id="nav">
+        <img src="logo.png">
+        <div class="flex-options">
+            <i class="fa fa-moon" id="toggle"></i>
+            <h4><%= teachername %></h4>
+            <a href="/teacher_login">Logout</a>
+        </div>
+    </nav>
+    <section>
+        <div class="left" id="left-sec">
+            <h3 class="heading">Dashboard</h3>
+            <a href="/teacherdashboard" class="box">
+                <i class="material-icons">dashboard</i>
+                <span>Dashboard</span>
+            </a>
+            <hr>
+            <h3 class="heading">Class Info</h3>
+            <a href="/assignments" class="box">
+                <i class="material-icons">assignment</i>
+                <span>Assignment</span>
+            </a>
+            <a href="/question-paper" class="box">
+                <i class="fa fa-question-circle"></i>
+                <span>Generate Question Paper</span>
+            </a>
+            <a href="calender.jpg" download="calender.jpg" class="box">
+                <i class="fas fa-calendar-alt"></i>
+                <span>Calender</span>
+            </a>
+            <a href="/updatemarks" class="box">
+                <i class="fas fa-chalkboard"></i>
+                <span>Update Marks</span>
+            </a>
+            <hr>
+            <h3 class="heading">Attendance</h3>
+            <a href="/attendance" class="box">
+                <i class="fas fa-user-graduate"></i>
+                <span>Update Attendance</span>
+            </a>
+            <hr>
+        </div>
+        <div class="right" id="right-sec">
+            <div class="flex-right">
+                <div class="flex-boxes">
+                    <div class="right-box" id="pro">
+                        <a href="/add_notice">Add Notice</a>
+                        <i class="fas fa-project-diagram" style="color:#f40373"></i>
+                    </div>
+                    <div class="right-box" id="pro">
+                        <a href="/ud_notice">Update/Delete Notice</a>
+                        <i class="fas fa-project-diagram" style="color:#03a9f4"></i>
+                    </div>
+                    <div class="right-box" id="syl">
+                       <a href="syllabus.pdf" download="syllabus.pdf" ><h3>Syllabus</h3></a>
+                        <i class="fas fa-book-open" style="color: pink;"></i>
+                    </div>
+                    <div class="right-box" id="lec">
+                        <a href="/upload_notes">Upload Notes<br>Lab Programs</a>
+                        <i class="fas fa-chalkboard-teacher" style="color: #f44336;"></i>
+                    </div>
+                  
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <p>&copy; 2024 Developed By Team 11</p>
+    </footer>
+
+    <script>
+        let toggle = document.getElementById("toggle");
+        let nav = document.getElementById("nav");
+        let left = document.getElementById("left-sec");
+        let right = document.getElementById("right-sec");
+        let boxes = document.querySelectorAll(".box");
+        let headings = document.querySelectorAll(".heading");
+        let notice = document.getElementById("notice");
+        let profile = document.getElementById("profile");
+
+        toggle.addEventListener("click", function() {
+            nav.classList.toggle("coloring");
+            left.classList.toggle("box-color");
+            right.classList.toggle("rightcolor");
+            toggle.classList.toggle("headings");
+            notice.classList.toggle("headings");
+            profile.classList.toggle("headings");
+            boxes.forEach(box => {
+                box.classList.toggle("coloring");
+            });
+            headings.forEach(heading => {
+                heading.classList.toggle("coloring");
+            });
+        });
+    </script>
+</body>
+
+</html>

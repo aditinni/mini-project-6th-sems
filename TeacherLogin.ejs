@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/x-icon" href="logo.png" />
+    <title>Teacher Login</title>
+    <link rel="stylesheet" href="./css/TeacherLogin.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Reddit+Mono:wght@200..900&display=swap');
+*{
+    margin: 0px;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background-color:#f4c430 ;
+    font-family: "Reddit Mono", monospace;
+}
+.container{
+    width: 70vw;
+    height: 60vh;
+    background-color: white;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+}
+.header{
+    width: 100%;
+    height: 30%;
+    background-color: white;
+}
+
+.header img{
+    margin:10px;
+    position: relative;
+    left: 25%;
+   
+}
+.loginheader{
+    width: 100%;
+    height: 10%;
+    background-color: #0fb173;
+    margin: 5px 0px;
+}
+.loginheader h1{
+    text-align: center;
+    color: white;
+}
+.formbody{
+          padding: 20px 0px;
+}
+.form-flex{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+    
+}
+.flex-inputfield{
+    display: flex;
+    gap: 10px;
+
+}
+label {
+    font-weight: bolder;
+}
+label span{
+    color: red;
+    margin: 4px;
+}
+input::placeholder{
+    font-family: "Reddit Mono", monospace;
+}
+input{
+    padding: 2px;
+    background-color: #0fb173;
+    border: 2px solid grey;
+    color: white;
+}
+button{
+    padding: 10px 14px;
+    width: 70px;
+    cursor: pointer;
+    background-color: #c2e3f4;
+    color: black;
+    font-family: "Reddit Mono", monospace;
+    border: transparent;
+
+}
+a{
+    color:#57afdb ;
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="logo.webp" alt="not able to load" width="500px" height="80%">
+        </div>
+        <hr>
+        <div class="loginheader">
+            <h1>Teacher Login</h1>
+        </div>
+        <div class="formbody">
+            <form method="post" action="/teacherdashboard" class="form-flex">
+                <div class="flex-inputfield">
+                    <label><span>*</span> LoginId</label>
+                    <input type="text" name="loginId" required>
+                </div>
+                <div class="flex-inputfield">
+                    <label><span>*</span>Password</label>
+                    <input type="password" name="password" required>
+                </div>
+               
+              
+                <button type="submit">Login</button>
+
+                
+                
+            </form>
+           
+        </div>
+    </div>
+</body>
+</html>

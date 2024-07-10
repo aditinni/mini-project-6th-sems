@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question Paper Generator</title>
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f2f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-image: url('https://bit-bangalore.edu.in/assets/images/explore/about-bit-1.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.container {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    width: 100%;
+    opacity: 0.6;
+    transition: opacity 1s;
+}
+
+.container:hover {
+    opacity: 1.0;
+}
+
+h1 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+    text-align: center;
+}
+
+.question {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.question label {
+    flex: 1;
+    margin-right: 10px;
+    color: #555;
+}
+
+.question input[type="text"],
+.question input[type="number"] {
+    flex: 3;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #333;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.question input[type="text"]:focus,
+.question input[type="number"]:focus {
+    border-color: #007bff;
+}
+
+button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 10px;
+    margin-right: 10px;
+    font-size: 14px;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+button:active {
+    background-color: #004085;
+}
+
+button[type="submit"] {
+    background-color: #007bff;
+}
+
+button[type="submit"]:hover {
+    background-color: #0069d9;
+}
+
+button[type="submit"]:active {
+    background-color: #0056b3;
+}
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Question Paper Generator</h1>
+        <form id="questionForm">
+            <label for="subject">Subject:</label>
+            <input type="text" name="subject" id="subject" required><br><br>
+            <label for="date">Date:</label>
+            <input type="date" name="date" id="date" required><br><br>
+            <div id="questionsContainer">
+                <div class="section">
+                    <h3>Part A (10 MARKS)</h3>
+                    <div class="question">
+                        <label for="question">Question 1a:</label>
+                        <input type="text" name="questionA1" required>
+                        <label for="marks">Marks:</label>
+                        <input type="number" name="marksA1" required>
+                    </div>
+                    <div class="question">
+                        <label for="question">Question 1b:</label>
+                        <input type="text" name="questionA2" required>
+                        <label for="marks">Marks:</label>
+                        <input type="number" name="marksA2" required>
+                    </div>
+                    <h4>OR</h4>
+                    <div class="question">
+                        <label for="question">Question 2a:</label>
+                        <input type="text" name="questionA3" required>
+                        <label for="marks">Marks:</label>
+                        <input type="number" name="marksA3" required>
+                    </div>
+                    <div class="question">
+                        <label for="question">Question 2b:</label>
+                        <input type="text" name="questionA4" required>
+                        <label for="marks">Marks:</label>
+                        <input type="number" name="marksA4" required>
+                    </div>
+                </div>
+                <div class="section">
+                    <h3>Part B (10 MARKS)</h3>
+                    <div class="question">
+                        <label for="question">Question 3a:</label>
+                        <input type="text" name="questionB1" required>
+                        <label for="marks">Marks:</label>
+                        <input type="number" name="marksB1" required>
+                    </div>
+                    <div class="question">
+                        <label for="question">Question 3b:</label>
+                        <input type="text" name="questionB2" required>
+                        <label for="marks">Marks:</label>
+                        <input type="number" name="marksB2" required>
+                    </div>
+                    <h4>OR</h4>
+                    <div class="question">
+                        <label for="question">Question 4a:</label>
+                        <input type="text" name="questionB3" required>
+                        <label for="marks">Marks:</label>
+                        <input type="number" name="marksB3" required>
+                    </div>
+                    <div class="question">
+                        <label for="question">Question 4b:</label>
+                        <input type="text" name="questionB4" required>
+                        <label for="marks">Marks:</label>
+                        <input type="number" name="marksB4" required>
+                    </div>
+                </div>
+            </div>
+            <button type="submit">Generate PDF</button>
+        </form>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.21/jspdf.plugin.autotable.min.js"></script>
+    <script>
+        document.getElementById('questionForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const subject = document.getElementById('subject').value;
+    const date = document.getElementById('date').value;
+    const formData = new FormData(this);
+    
+    const questionsA = [
+        { question: formData.get('questionA1'), marks: formData.get('marksA1') },
+        { question: formData.get('questionA2'), marks: formData.get('marksA2') },
+        { question: formData.get('questionA3'), marks: formData.get('marksA3') },
+        { question: formData.get('questionA4'), marks: formData.get('marksA4') }
+    ];
+    
+    const questionsB = [
+        { question: formData.get('questionB1'), marks: formData.get('marksB1') },
+        { question: formData.get('questionB2'), marks: formData.get('marksB2') },
+        { question: formData.get('questionB3'), marks: formData.get('marksB3') },
+        { question: formData.get('questionB4'), marks: formData.get('marksB4') }
+    ];
+
+    // Generate PDF using jsPDF
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    const collegeName = "BANGALORE INSTITUTE OF TECHNOLOGY"; // Replace with your college name
+
+    // Add header
+    doc.setFontSize(14);
+    doc.text(collegeName, 105, 10, null, null, 'center');
+    doc.text("Department of Computer Science & Engineering ", 105, 18, null, null, 'center');
+    doc.text(`Subject: ${subject}`, 105, 26, null, null, 'center');
+    doc.text(`Date: ${date}`, 105, 34, null, null, 'center');
+    
+    doc.setFontSize(12);
+    doc.text("INSTRUCTIONS: ANSWER ONE FULL QUESTION FROM EACH PART", 10, 42);
+    
+    // Add Part A
+    doc.text("PART A (10 MARKS)", 10, 52);
+    doc.autoTable({
+        startY: 56,
+        head: [['Q No.', 'Question', 'Marks']],
+        body: [
+            ['1.a', questionsA[0].question, questionsA[0].marks],
+            ['1.b', questionsA[1].question, questionsA[1].marks],
+            [{ content: 'OR', colSpan: 3, styles: { halign: 'center' } }],
+            ['2.a', questionsA[2].question, questionsA[2].marks],
+            ['2.b', questionsA[3].question, questionsA[3].marks],
+        ],
+        theme: 'grid'
+    });
+    
+    // Add Part B
+    doc.text("PART B (10 MARKS)", 10, doc.lastAutoTable.finalY + 10);
+    doc.autoTable({
+        startY: doc.lastAutoTable.finalY + 14,
+        head: [['Q No.', 'Question', 'Marks']],
+        body: [
+            ['3.a', questionsB[0].question, questionsB[0].marks],
+            ['3.b', questionsB[1].question, questionsB[1].marks],
+            [{ content: 'OR', colSpan: 3, styles: { halign: 'center' } }],
+            ['4.a', questionsB[2].question, questionsB[2].marks],
+            ['4.b', questionsB[3].question, questionsB[3].marks],
+        ],
+        theme: 'grid'
+    });
+    
+    // Save the PDF
+    doc.save('question_paper.pdf');
+});
+
+    </script>
+</body>
+
+    
+</body>
+</html>
